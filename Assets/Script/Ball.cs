@@ -4,26 +4,33 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public int SpawnTimer;
     private Rigidbody2D ballRB;
-
-    void SpawnBall()
-    {
-        float rand = Random.Range(0, 2);
-
-        if(rand < 1)
-        {
-            ballRB.AddForce(new Vector2(20, -15));
-        } 
-        else 
-        {
-            ballRB.AddForce(new Vector2(-20, -15));
-        }
-    }
-
     void Start()
     {
         ballRB = GetComponent<Rigidbody2D>();
-        Invoke("SpawnBall", 2);
+        Invoke("SpawnBall", SpawnTimer);
+    }
+    void SpawnBall()
+    {
+        float rand = Random.Range(0, 4);
+
+        if(rand == 1)
+        {
+            ballRB.AddForce(new Vector2(20, -15));
+        } 
+        else if(rand == 2)
+        {
+            ballRB.AddForce(new Vector2(-20, -15));
+        }
+        else if(rand == 3)
+        {
+            ballRB.AddForce(new Vector2(20, 15));
+        }
+        else
+        {
+            ballRB.AddForce(new Vector2(-20, 15));
+        }
     }
 
     void ResetBall()
@@ -40,15 +47,7 @@ public class Ball : MonoBehaviour
 
     void OnCollision (Collision2D coll) 
     {
-        if(coll.collider.CompareTag("Player 1"))
-        {
-            Vector2 vel;
-            vel.x = ballRB.velocity.x;
-            vel.y = (ballRB.velocity.y / 2) + (coll.collider.attachedRigidbody.velocity.y / 3);
-            ballRB.velocity = vel;
-        }
-
-        if(coll.collider.CompareTag("Player 2"))
+        if(coll.collider.CompareTag("Player"))
         {
             Vector2 vel;
             vel.x = ballRB.velocity.x;

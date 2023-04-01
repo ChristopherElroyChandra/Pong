@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (hitInfo.name == "Ball")
+        {
+            string wallName = transform.name;
+						
+            GameManager.instance.Score(wallName);
+						
+            hitInfo.gameObject.SendMessage("RestartGame", 1.0f, SendMessageOptions.RequireReceiver);
+        }
     }
 }

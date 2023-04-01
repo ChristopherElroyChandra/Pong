@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public KeyCode Up = KeyCode.W;
-    public KeyCode Down = KeyCode.S;
-    public float speed = 10.0f;
-    public float boundY = 4f;
+    public KeyCode Up;
+    public KeyCode Down;
+    public float speed;
+    public float boundY;
     private Rigidbody2D PlayerRB;
 
     void Start () 
